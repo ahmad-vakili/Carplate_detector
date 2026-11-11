@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}نتیجه تشخیص — CarPlate360{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width:900px;">
+  <div class="card-body">
+    <h4 class="card-title">نتیجه تشخیص پلاک</h4>
+
+    {% if plate %}
+      <p><strong>پلاک تشخیص داده شده:</strong> {{ plate.plate_text }}</p>
+      {% if plate.frame_image %}
+      <div class="mb-3">
+        <img src="{{ plate.frame_image.url }}" class="img-fluid border" alt="Detected frame">
+      </div>
+      {% endif %}
+      <a href="{% url 'license_plate:upload' %}" class="btn btn-outline-primary">بارگذاری ویدیو دیگر</a>
+    {% else %}
+      <div class="alert alert-warning">نتیجه‌ای ثبت نشده است.</div>
+      <a href="{% url 'license_plate:upload' %}" class="btn btn-primary">بازگشت</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
